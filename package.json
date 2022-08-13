@@ -63,6 +63,6 @@
     "@parcel/core": "^2.7.0"
   },
   "dependencies": {
-    "@swc/helpers": "^0.3.17"
+    "@swc/helpers": "^0.4.2"
   }
 }
