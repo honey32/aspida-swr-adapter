@@ -1,6 +1,6 @@
 import { DefineMethods } from "aspida";
 
-type HelloDetail = {
+export type HelloDetail = {
   message: string;
 };
 
