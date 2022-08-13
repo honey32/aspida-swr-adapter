@@ -1,1 +1,1 @@
-export const a = 123456789;
+export { resolveAspida } from "./resolveAspida";
