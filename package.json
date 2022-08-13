@@ -1,0 +1,68 @@
+{
+  "name": "aspida-swr-adapter",
+  "version": "0.0.0",
+  "description": "simple, null-safe, and DRY adapter function for aspida and swr",
+  "source": "src/index.ts",
+  "main": "dist/main.js",
+  "module": "dist/module.js",
+  "types": "dist/types.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "prepare": "npm-run-all -s setup-git-hooks-prepare setup-git-hooks",
+    "setup-git-hooks-prepare": "mkdirp .git/hooks",
+    "setup-git-hooks": "simple-git-hooks",
+    "test": "jest",
+    "watch": "parcel watch",
+    "check": "tsc --noEmit",
+    "build": "parcel build",
+    "lint": "eslint \"src/**/*.ts\"",
+    "lint:fix": "eslint \"src/**/*.ts\"",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "prepack": "npm-run-all -s check build"
+  },
+  "browserslist": [
+    "> 0.5% and not dead",
+    "IE 11"
+  ],
+  "simple-git-hooks": {
+    "pre-commit": "pnpm lint-staged"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  },
+  "keywords": [],
+  "author": "honey32",
+  "license": "MIT",
+  "devDependencies": {
+    "@parcel/packager-ts": "^2.5.0",
+    "@parcel/transformer-typescript-types": "^2.5.0",
+    "@types/jest": "^27.5.1",
+    "@typescript-eslint/eslint-plugin": "^5.25.0",
+    "@typescript-eslint/parser": "^5.25.0",
+    "eslint": "^8.16.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jest": "^26.2.2",
+    "eslint-plugin-n": "^15.2.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "jest": "^28.1.0",
+    "lint-staged": "^12.4.1",
+    "mkdirp": "^1.0.4",
+    "npm-run-all": "^4.1.5",
+    "parcel": "^2.5.0",
+    "prettier": "^2.6.2",
+    "simple-git-hooks": "^2.7.0",
+    "ts-jest": "^28.0.2",
+    "typescript": "^4.6.4",
+    "@parcel/core": "^2.7.0"
+  },
+  "dependencies": {
+    "@swc/helpers": "^0.3.17"
+  }
+}
