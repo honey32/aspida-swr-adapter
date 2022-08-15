@@ -1,8 +1,8 @@
 import { NextPage } from "next";
+import useSWR from "swr";
 import { resolveAspida } from "aspida-swr-adapter";
 import { apiClient } from "~/src/apiClient";
 import { useIntParam } from "~/src/useIntParam";
-import useSWR from "swr";
 
 const UserDetailPage: NextPage = () => {
   const { value: userId } = useIntParam("userId");
