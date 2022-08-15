@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import useSWR from "swr";
-import { apiClient } from "../apiClient";
+import { apiClient } from "~/src/apiClient";
 import { resolveAspida } from "aspida-swr-adapter";
 
 const Home: NextPage = () => {

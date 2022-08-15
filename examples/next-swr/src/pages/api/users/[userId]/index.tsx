@@ -1,6 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
-import { UserDetail } from "../../../../../api/users/_userId@number/index";
+import { UserDetail } from "~/api/users/_userId@number/index";
 
 type Data = UserDetail;
 

@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import { resolveAspida } from "aspida-swr-adapter";
-import { apiClient } from "../../../apiClient";
+import { apiClient } from "~/src/apiClient";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 
