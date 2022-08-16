@@ -17,6 +17,7 @@
     "@aspida/fetch": "^1.10.3",
     "@swc/helpers": "^0.4.2",
     "aspida": "^1.10.3",
+    "aspida-swr-adapter": "workspace:*",
     "next": "12.2.5",
     "react": "18.2.0",
     "react-dom": "18.2.0",
