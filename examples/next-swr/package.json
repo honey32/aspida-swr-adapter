@@ -10,7 +10,8 @@
     "build:aspida": "aspida",
     "build:next": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "check": "npm-run-all build"
   },
   "dependencies": {
     "@aspida/fetch": "^1.10.3",
