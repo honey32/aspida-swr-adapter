@@ -17,5 +17,7 @@
 
     /* Completeness */
     "skipLibCheck": true
-  }
+  },
+
+  "exclude": ["examples"]
 }
