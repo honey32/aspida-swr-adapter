@@ -3,34 +3,36 @@ import { OrFalsy } from "./types/utils";
 
 type Keys<
   M,
-  Eager extends readonly unknown[],
-  Lazy extends readonly unknown[]
-> = [path: string, method: M, ...eager: Eager, ...lazy: Lazy];
+  Extra extends readonly unknown[],
+  Params extends readonly unknown[]
+> = [path: string, method: M, ...extra: Extra, ...params: Params];
 
 /**
  */
 export const aspidaToSWR = <
   T extends AnyApi,
   M extends MethodOf<T>,
-  Eager extends readonly unknown[]
+  Extra extends readonly unknown[]
 >(
   api: OrFalsy<T>,
   method: M,
-  eager: OrFalsy<Eager>
+  extra: OrFalsy<Extra>
 ) => ({
-  params: <Lazy extends readonly unknown[]>(
-    fetchFn: (fn: T[M], ...extra: [...Eager, ...Lazy]) => ReturnType<T[M]>
+  params: <Params extends readonly unknown[]>(
+    fetchFn: (fn: T[M], ...rest: [...Extra, ...Params]) => ReturnType<T[M]>
   ): [
-    getKey: (...lazy: Lazy) => Keys<M, Eager, Lazy> | null,
-    fetcher: (...args: Keys<M, Eager, Lazy>) => ReturnType<typeof fetchFn>
+    getKey: (...params: Params) => Keys<M, Extra, Params> | null,
+    fetcher: (...args: Keys<M, Extra, Params>) => ReturnType<typeof fetchFn>
   ] => [
     // getKey:
-    (...lazy) => {
-      return !!api && !!eager ? [api.$path(), method, ...eager, ...lazy] : null;
+    (...params) => {
+      return !!api && !!extra
+        ? [api.$path(), method, ...extra, ...params]
+        : null;
     },
     // fetcher:
-    (_path, method, ...extra) => {
-      if (!!api && !!eager) return fetchFn(api![method], ...extra);
+    (_path, method, ...rest) => {
+      if (!!api && !!rest) return fetchFn(api![method], ...rest);
       throw new Error("Unreachable Code");
     },
   ],
