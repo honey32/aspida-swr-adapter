@@ -1,4 +1,4 @@
-import { resolveAspida } from "aspida-swr-adapter";
+import { aspidaToSWR } from "aspida-swr-adapter";
 import { NextPage } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -19,13 +19,13 @@ const UsersIndexPage: NextPage = () => {
   const router = useRouter();
   const token = router.query.token;
 
-  const [getKey, fetcher] = resolveAspida(
+  const [getKey, fetcher] = aspidaToSWR(
     userId !== undefined && // Conditional; fetched only when userId is defined.
       apiClient.users._userId(userId).posts,
     "$get",
     isValidToken(token) && // Conditional; fetched only when passed `[token]`.
       ([token] as const)
-  ).withParams<[page: number]>( // should annotate lazy params explicitly.
+  ).params<[page: number]>( // should annotate lazy params explicitly.
     (fn, token, page) => fn({ query: { token, page } })
     // `token` is passed in the argument above.
     // `page` to be passed using `getKey()` function.
