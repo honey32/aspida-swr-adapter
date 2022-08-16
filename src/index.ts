@@ -1,1 +1,1 @@
-export { resolveAspida } from "./resolveAspida";
+export { aspidaToSWR } from "./aspidaToSWR";
