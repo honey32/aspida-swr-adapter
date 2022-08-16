@@ -9,7 +9,7 @@ type Keys<
 
 /**
  */
-export const resolveAspida = <
+export const aspidaToSWR = <
   T extends AnyApi,
   M extends MethodOf<T>,
   Eager extends readonly unknown[]
@@ -18,7 +18,7 @@ export const resolveAspida = <
   method: M,
   eager: OrFalsy<Eager>
 ) => ({
-  withParams: <Lazy extends readonly unknown[]>(
+  params: <Lazy extends readonly unknown[]>(
     fetchFn: (fn: T[M], ...extra: [...Eager, ...Lazy]) => ReturnType<T[M]>
   ): [
     getKey: (...lazy: Lazy) => Keys<M, Eager, Lazy> | null,
