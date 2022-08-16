@@ -61,6 +61,7 @@ importers:
       '@types/react': 18.0.17
       '@types/react-dom': 18.0.6
       aspida: ^1.10.3
+      aspida-swr-adapter: workspace:*
       eslint: 8.21.0
       eslint-config-next: 12.2.5
       next: 12.2.5
@@ -73,6 +74,7 @@ importers:
       '@aspida/fetch': 1.10.3
       '@swc/helpers': 0.4.6
       aspida: 1.10.3
+      aspida-swr-adapter: link:../..
       next: 12.2.5_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
