@@ -12,7 +12,7 @@ This enables [Conditional or Depentent Fetching](https://swr.vercel.app/docs/con
 This library has only one API  
 
 ```plaintext
-aspidaToSWR(api, method, extra).params<[p_0: Type, ...]>(/* how to fetch using extra and params */);
+aspidaToSWR(api, method, extra).params<[p_0: Type, ...]>(callback);
 ```
 
 whose return values `[getKey, fetcher]` (in tuple) are ready to pass to `useSWR`, `useSWRInfinite`, and `useSWRImmutable`.
