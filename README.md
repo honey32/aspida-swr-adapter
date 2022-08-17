@@ -9,6 +9,16 @@ This enables [Conditional or Depentent Fetching](https://swr.vercel.app/docs/con
 
 ## Quick Start
 
+This library has only one API  
+
+```plaintext
+aspidaToSWR(api, method, extra).params<[p_0: Type, ...]>(/* how to fetch using extra and params */);
+```
+
+whose return values `[getKey, fetcher]` (in tuple) are ready to pass to `useSWR`, `useSWRInfinite`, and `useSWRImmutable`.
+
+For example...
+
 ```tsx
 const { value: userId } = useIntParam("userId");
 
@@ -16,13 +26,20 @@ const router = useRouter();
 const token = router.query.token;
 
 const [getKey, fetcher] = aspidaToSWR(
+  // api: Api (if falsy, SWR will not start request)
   userId !== undefined &&
     apiClient.users._userId(userId).posts,
+  // method: declared method in Api
   "$get",
+  // extra: [string] tuple (if *falsy*, SWR will not start request)
   isValidToken(token) &&
     ([token] as const)
 ).params<[page: number]>(
+  // getKey to be (page: number) => keys
   (fn, token, page) => fn({ query: { token, page } })
+  // tell how to fetch data using 
+  //   extra ([string]) and params ([page: number])
+  // where `fn` is `apiClient.users._userId(userId).posts.$get`
 );
 
 const { data: pagesData, setSize } = useSWRInfinite(
@@ -36,9 +53,3 @@ const { data: pagesData, setSize } = useSWRInfinite(
 ## Examples
 
 In [`examples/next-swr`](examples/next-swr) subproject, You can find some example code (using Next.js) like below.
-
-### with `useSWR`
-[`src/pages/users/[userId]/index.page.tsx`](examples/next-swr/src/pages/users/%5BuserId%5D/index.page.tsx)
-
-### with `useSWRInfinite`
-[`src/pages/users/[userId]/posts/index.page.tsx`](examples/next-swr/src/pages/users/%5BuserId%5D/posts/index.page.tsx)
