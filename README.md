@@ -22,11 +22,55 @@ whose return values `[getKey, fetcher]` (in tuple) are ready to pass to `useSWR`
 
 For example...
 
-```tsx
-const { value: userId } = useIntParam("userId");
+### Simple
 
-const router = useRouter();
-const token = router.query.token;
+```tsx
+// ${basePath}/users/{userId}&token=xyz
+
+// userId: number | undefined
+// token: string | undefined
+
+const args = aspidaToSWR(
+  userId !== undefined && apiClient.users._userId(userId),
+  "$get",
+  isValidToken(token) &&
+    ([token] as const)
+).params<[]>((fn, token) => fn( query: { token } ));
+
+const { data } = useSWR(...args);
+```
+
+### Keys with Parameters
+
+```tsx
+// ${basePath}/users/{userId}/posts?page=2&token=xyz
+
+// userId: number | undefined
+// token: string | undefined
+
+const [getKey, fetcher] = aspidaToSWR(
+  userId !== undefined &&
+    apiClient.users._userId(userId).posts,
+  "$get",
+  isValidToken(token) &&
+    ([token] as const)
+).params<[page: number]>(
+  (fn, token, page) => fn({ query: { token, page } })
+);
+
+const { data: pagesData, setSize } = useSWRInfinite(
+  (pageIndex) => getKey(pageIndex),
+  fetcher,
+  { initialSize: 2 }
+);
+
+```
+
+Let's take a closer look.
+
+```tsx
+// userId: number | undefined
+// token: string | undefined
 
 const [getKey, fetcher] = aspidaToSWR(
   // api: Api (if falsy, SWR will not start request)
