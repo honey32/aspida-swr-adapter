@@ -98,4 +98,4 @@ const { data: pagesData, setSize } = useSWRInfinite(
 
 ## Examples
 
-In [`examples/next-swr`](examples/next-swr) subproject, You can find some example code (using Next.js) like below.
+In [`examples/next-swr`](https://github.com/honey32/aspida-swr-adapter/tree/develop/examples/next-swr) subproject, You can find some example code (using Next.js) like below.
