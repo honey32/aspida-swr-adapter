@@ -1,6 +1,6 @@
 {
   "name": "aspida-swr-adapter",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "simple, null-safe, and DRY adapter function for aspida and swr",
   "source": "src/index.ts",
   "main": "dist/main.js",
