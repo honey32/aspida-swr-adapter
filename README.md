@@ -25,7 +25,7 @@ For example...
 ### Simple
 
 ```tsx
-// ${basePath}/users/{userId}&token=xyz
+// GET ${basePath}/users/{userId}&token=xyz
 
 // userId: number | undefined
 // token: string | undefined
@@ -33,8 +33,7 @@ For example...
 const args = aspidaToSWR(
   userId !== undefined && apiClient.users._userId(userId),
   "$get",
-  isValidToken(token) &&
-    ([token] as const)
+  isValidToken(token) && ([token] as const)
 ).params<[]>((fn, token) => fn( query: { token } ));
 
 const { data } = useSWR(...args);
@@ -43,7 +42,7 @@ const { data } = useSWR(...args);
 ### Keys with Parameters
 
 ```tsx
-// ${basePath}/users/{userId}/posts?page=2&token=xyz
+// GET ${basePath}/users/{userId}/posts?page=2&token=xyz
 
 // userId: number | undefined
 // token: string | undefined
