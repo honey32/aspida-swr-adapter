@@ -1,5 +1,7 @@
 # Aspida-SWR Adapter
 
+<img width="320" alt="Frame 1_small" src="https://user-images.githubusercontent.com/22636511/185938874-cca4c056-41a5-460c-96c6-39482e9fa33b.png">
+
 [![npm version](https://badge.fury.io/js/aspida-swr-adapter.svg)](https://badge.fury.io/js/aspida-swr-adapter) 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
