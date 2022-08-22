@@ -12,6 +12,12 @@
 
 This enables [Conditional or Depentent Fetching](https://swr.vercel.app/docs/conditional-fetching) in easy, DRY, and null-safe way.
 
+## Install
+
+```
+npm i next-query-utils
+```
+
 ## Quick Start
 
 This library has only one API  
