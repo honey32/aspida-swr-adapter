@@ -15,7 +15,7 @@ This enables [Conditional or Depentent Fetching](https://swr.vercel.app/docs/con
 ## Install
 
 ```
-npm i next-query-utils
+npm i aspida-swr-adapter
 ```
 
 ## Quick Start
