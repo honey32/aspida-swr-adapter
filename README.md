@@ -12,6 +12,12 @@
 
 This enables [Conditional or Depentent Fetching](https://swr.vercel.app/docs/conditional-fetching) in easy, DRY, and null-safe way.
 
+---
+
+This library doesn't have dependency on SWR.
+
+However, if you use SWR, **we recommend you to use ver 2.x**
+
 ## Install
 
 ```
