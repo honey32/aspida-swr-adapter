@@ -11,7 +11,7 @@ const UserDetailPage: NextPage = () => {
     userId !== undefined && apiClient.users._userId(userId),
     "$get",
     []
-  ).params<[]>((fn) => fn());
+  ).params((fn) => fn());
 
   const { data } = useSWR(...args);
 

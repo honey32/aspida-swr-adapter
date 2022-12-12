@@ -18,7 +18,7 @@ export const aspidaToSWR = <
   method: M,
   extra: OrFalsy<Extra>
 ) => ({
-  params: <Params extends readonly unknown[]>(
+  params: <Params extends readonly unknown[] = []>(
     fetchFn: (fn: T[M], ...rest: [...Extra, ...Params]) => ReturnType<T[M]>
   ): [
     getKey: (...params: Params) => Keys<M, Extra, Params> | null,
