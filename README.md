@@ -23,7 +23,7 @@ npm i aspida-swr-adapter
 This library has only one API  
 
 ```plaintext
-aspidaToSWR(api, method, extra).params<[p_0: Type, ...]>(callback);
+aspidaToSWR(api, method, extra, (fn, extra, ...params) => ..);
 ```
 
 whose return values `[getKey, fetcher]` (in tuple) are ready to pass to `useSWR`, `useSWRInfinite`, and `useSWRImmutable`.
@@ -41,8 +41,9 @@ For example...
 const args = aspidaToSWR(
   userId !== undefined && apiClient.users._userId(userId),
   "$get",
-  isValidToken(token) && { token }
-).params((fn, { token }) => fn( query: { token } ));
+  isValidToken(token) && { token },
+  (fn, { token }) => fn( query: { token } )
+);
 
 const { data } = useSWR(...args);
 ```
@@ -59,8 +60,7 @@ const [getKey, fetcher] = aspidaToSWR(
   userId !== undefined &&
     apiClient.users._userId(userId).posts,
   "$get",
-  isValidToken(token) && { token }
-).params(
+  isValidToken(token) && { token },
   (fn, { token }, page: number) => fn({ query: { token, page } })
 );
 
@@ -88,14 +88,13 @@ const [getKey, fetcher] = aspidaToSWR(
   // If nothing needed, pass [] or {} (or some *truthy* value) explicitly
   // , otherwise SWR will not start request.
   isValidToken(token) &&
-    { token }
-).params( // ).params<[page: number]>( ... inferred from the type annotation.
-  // getKey to be (page: number) => keys
-  (fn, { token }, page: number) => fn({ query: { token, page } })
-  // tell how to fetch data using 
+    { token },
+  // fetchFn: how to fetch data using 
   // - `extra` ({ token: string }) 
   // - variadic `...params` (...[page: number])
   // where `fn` is `apiClient.users._userId(userId).posts.$get`
+  (fn, { token }, page: number) => fn({ query: { token, page } })
+  // getKey to be (page: number) => keys  ... inferred from the type annotation.
 );
 
 const { data: pagesData, setSize } = useSWRInfinite(

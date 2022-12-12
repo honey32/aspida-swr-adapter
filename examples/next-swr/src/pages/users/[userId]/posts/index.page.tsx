@@ -23,11 +23,10 @@ const UsersIndexPage: NextPage = () => {
     userId !== undefined && // Conditional; fetched only when userId is defined.
       apiClient.users._userId(userId).posts,
     "$get",
-    isValidToken(token) && { token } // Conditional; fetched only when passed `{ token }`.
-  ).params(
+    isValidToken(token) && { token }, // Conditional; fetched only when passed `{ token }`.
     (fn, { token }, page: number) => fn({ query: { token, page } })
     // extra arguments (`{ token }`) is passed in the argument above.
-    // `page` should be type-annotated here, so that `getKey()` has `(page: number)` params signature. 
+    // `page` should be type-annotated here, so that `getKey()` has `(page: number)` params signature.
   );
 
   const { data: pagesData, setSize } = useSWRInfinite(
