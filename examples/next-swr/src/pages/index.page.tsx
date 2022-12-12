@@ -4,7 +4,7 @@ import useSWR from "swr";
 import { apiClient } from "~/src/apiClient";
 
 const Home: NextPage = () => {
-  const args = aspidaToSWR(apiClient.hello, "$get", []).params<[]>((fn) =>
+  const args = aspidaToSWR(apiClient.hello, "$get", []).params((fn) =>
     fn()
   );
   const { data } = useSWR(...args);
