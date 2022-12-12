@@ -41,8 +41,8 @@ For example...
 const args = aspidaToSWR(
   userId !== undefined && apiClient.users._userId(userId),
   "$get",
-  isValidToken(token) && ([token] as const)
-).params<[]>((fn, token) => fn( query: { token } ));
+  isValidToken(token) && { token }
+).params((fn, { token }) => fn( query: { token } ));
 
 const { data } = useSWR(...args);
 ```
@@ -59,10 +59,9 @@ const [getKey, fetcher] = aspidaToSWR(
   userId !== undefined &&
     apiClient.users._userId(userId).posts,
   "$get",
-  isValidToken(token) &&
-    ([token] as const)
-).params<[page: number]>(
-  (fn, token, page) => fn({ query: { token, page } })
+  isValidToken(token) && { token }
+).params(
+  (fn, { token }, page: number) => fn({ query: { token, page } })
 );
 
 const { data: pagesData, setSize } = useSWRInfinite(
@@ -80,19 +79,22 @@ Let's take a closer look.
 // token: string | undefined
 
 const [getKey, fetcher] = aspidaToSWR(
-  // api: Api (if falsy, SWR will not start request)
+  // api: Api inferred from value (if falsy, SWR will not start request)
   userId !== undefined &&
     apiClient.users._userId(userId).posts,
   // method: declared method in Api
   "$get",
-  // extra: [string] tuple (if *falsy*, SWR will not start request)
+  // extra: any, inferred from value (if *falsy*, SWR will not start request)
+  // If nothing needed, pass [] or {} (or some *truthy* value) explicitly
+  // , otherwise SWR will not start request.
   isValidToken(token) &&
-    ([token] as const)
-).params<[page: number]>(
+    { token }
+).params( // ).params<[page: number]>( ... inferred from the type annotation.
   // getKey to be (page: number) => keys
-  (fn, token, page) => fn({ query: { token, page } })
+  (fn, { token }, page: number) => fn({ query: { token, page } })
   // tell how to fetch data using 
-  //   extra ([string]) and params ([page: number])
+  // - `extra` ({ token: string }) 
+  // - variadic `...params` (...[page: number])
   // where `fn` is `apiClient.users._userId(userId).posts.$get`
 );
 
