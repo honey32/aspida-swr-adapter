@@ -10,8 +10,9 @@ const UserDetailPage: NextPage = () => {
   const args = aspidaToSWR(
     userId !== undefined && apiClient.users._userId(userId),
     "$get",
-    []
-  ).params((fn) => fn());
+    [],
+    (fn) => fn()
+  );
 
   const { data } = useSWR(...args);
 
